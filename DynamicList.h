@@ -1,17 +1,28 @@
 #ifndef DYNAMICLIST_H_
 #define DYNAMICLIST_H_
 #include "SeqList.h"
+#include<iostream>
+
 namespace mylib
 {
 	template <typename T>
-	class DynamicList : public SeqList <T>
+	class DynamicList :public Seqlist<T>
 	{
 	protected:
 		int m_capcity;
 	public:
 		DynamicList(int cap)
 		{
-
+			this->m_array = new T[cap];
+			if (this->m_array != NULL)
+			{
+				this->m_capcity = cap;
+				this->m_length = 0;
+			}
+			else
+			{
+				cout << "MemoryError" << endl;
+			}
 		}
 		int capcity()const
 		{
@@ -19,11 +30,31 @@ namespace mylib
 		}
 		void resize(int cap)
 		{
-
+			if (capcity != cap)
+			{
+				T* array = new T[cap];
+				if (array != NULL)
+				{
+					int length = (this->m_length < cap ? this->m_length : cap);
+					for (int i = 0; i < length; i++)
+					{
+						array[i] = this->m_array[i];
+					}
+					T* temp = this->m_array;
+					this->m_array = array;
+					this->m_length = length;
+					this->m_capcity = cap;
+					delete[] temp;
+				}
+				else 
+				{
+					cout << "ResizeError" << endl;
+				}
+			}
 		}
 		~DynamicList()
 		{
-
+			delete[] this->m_array;
 		}
 	};
 }

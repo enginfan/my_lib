@@ -151,12 +151,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Array.h" />
     <ClInclude Include="DynamicList.h" />
     <ClInclude Include="Exception.h" />
     <ClInclude Include="List.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="SeqList.h" />
     <ClInclude Include="SmartPointer.h" />
+    <ClInclude Include="StaticArray.h" />
     <ClInclude Include="StaticList.h" />
   </ItemGroup>
   <ItemGroup>

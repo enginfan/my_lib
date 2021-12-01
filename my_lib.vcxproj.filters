@@ -36,6 +36,12 @@
     <ClInclude Include="DynamicList.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="Array.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="StaticArray.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="my_lib.cpp">
