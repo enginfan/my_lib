@@ -34,9 +34,9 @@ namespace mylib
 			m_pointer = p.m_pointer;
 			const_cast<SmartPointer<T>&>(p).m_pointer = 0;
 		}
-		SmartPointer<T>& operator=(const SmartPointer<T>* p)
+		SmartPointer<T>& operator=(const SmartPointer<T>& p)
 		{
-			if (*this != p)
+			if (*this != &p)
 			{
 				delete m_pointer;
 				m_pointer = p.m_pointer;

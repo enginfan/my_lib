@@ -5,23 +5,24 @@
 #include "StaticList.h"
 #include "DynamicList.h"
 #include "StaticArray.h"
-using namespace std;
+#include "DynamicArray.h"
+
 using namespace mylib;
 
 int main()
 {
-	StaticArray<int, 10> a;
-	for (int i=0; i < 10; i++)
+	DynamicArray<int> a(2);
+	for (int i=0; i < 1; i++)
 	{
 		a[i] = i * i;
 	}
-	for (int i=0; i < 10; i++)
+	/*for (int i=0; i < 10; i++)
 	{
 		cout<<"a["<<i<<"]=" << a[i] << endl;
-	}
+	}*/
 	cout << "_________________________________________" << endl;
-	StaticArray<int, 10> b = a;
-	for (int i = 0; i < 10; i++)
+	DynamicArray<int> b = a;
+	/*for (int i = 0; i < 1; i++)
 	{
 		cout << "b[" << i << "]=" << b[i] << endl;
 	}
@@ -33,11 +34,9 @@ int main()
 	for (int i = 0; i < 10; i++)
 	{
 		cout << "a[" << i << "]=" << a[i] << endl;
-	}
+	}*/
+	
 	b = a;
-	for (int i = 0; i < 10; i++)
-	{
-		cout << "b[" << i << "]=" << b[i] << endl;
-	}
+	
 	return 0;
 }

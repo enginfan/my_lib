@@ -22,9 +22,9 @@ namespace mylib
 				this->m_array[i] = obj.m_array[i];//space
 			}
 		}
-		StaticArray<T, N>& operator=(const StaticArray<T, N>* obj)
+		StaticArray<T, N>& operator=(const StaticArray<T, N>& obj)
 		{
-			if (*this != obj)
+			if (this != &obj)
 			{
 				for (int i = 0; i < N; i++)
 				{
