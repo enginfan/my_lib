@@ -6,37 +6,23 @@
 #include "DynamicList.h"
 #include "StaticArray.h"
 #include "DynamicArray.h"
+#include "LinkList.h"
 
 using namespace mylib;
 
 int main()
 {
-	DynamicArray<int> a(2);
-	for (int i=0; i < 1; i++)
-	{
-		a[i] = i * i;
-	}
-	/*for (int i=0; i < 10; i++)
-	{
-		cout<<"a["<<i<<"]=" << a[i] << endl;
-	}*/
-	cout << "_________________________________________" << endl;
-	DynamicArray<int> b = a;
-	/*for (int i = 0; i < 1; i++)
-	{
-		cout << "b[" << i << "]=" << b[i] << endl;
-	}
-	cout << "_________________________________________" << endl;
+	int v = 0;
+	LinkList<int> a;
 	for (int i = 0; i < 10; i++)
 	{
-		a[i] = i;
+		cout<<a.insert(i)<<endl;
 	}
-	for (int i = 0; i < 10; i++)
+	cout << "a.length=" << a.length() << endl;
+	/*for (int i = 0; i < 10; i++)
 	{
-		cout << "a[" << i << "]=" << a[i] << endl;
+		a.get(i, v);
+		cout << v << endl;
 	}*/
-	
-	b = a;
-	
 	return 0;
 }
