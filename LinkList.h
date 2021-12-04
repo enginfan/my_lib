@@ -1,7 +1,6 @@
 #ifndef LINKLIST_H_
 #define LINKLIST_H_
 #include "List.h"
-
 namespace mylib
 {
 	template <typename T>
@@ -56,7 +55,7 @@ namespace mylib
 			if (ret)
 			{
 				Node* current = &m_header;
-				for (int p = 0; i < p; i++)
+				for (int p = 0; p<i; p++)
 				{
 					current = current->next;
 				}
@@ -73,7 +72,7 @@ namespace mylib
 			if(ret)
 			{
 				Node* current = &m_header;
-				for (int p = 0; p < i; i++)
+				for (int p = 0; p < i; p++)
 				{
 					current = current->next;
 				}
@@ -84,11 +83,11 @@ namespace mylib
 		}
 		bool get(int i, T& e)
 		{
-			bool ret = ((i <= 0) && (i < m_length));
+			bool ret = ((i >= 0) && (i < m_length));
 			if (ret)
 			{
 				Node* current = &m_header;
-				for (int p = 0; p < i; i++)
+				for (int p = 0; p < i; p++)
 				{
 					current = current->next;
 				}
