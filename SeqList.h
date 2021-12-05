@@ -61,7 +61,7 @@ namespace mylib
 		}
 		bool get(int i, T& e)
 		{
-			bool ret = ((i <= 0) && (i < m_length));
+			bool ret = ((i >= 0) && (i < m_length));
 			if (ret)
 			{
 				e = m_array[i];
@@ -87,6 +87,19 @@ namespace mylib
 		}
 		//数组容量确定
 		virtual int capcity() const= 0;
+		int find(const T& e)const
+		{
+			int ret = -1;
+			for (int i = 0; i < m_length; i++)
+			{
+				if (m_array[i] == e)
+				{
+					ret = i;
+					break;
+				}
+			}
+			return ret;
+		}
 	};
 }
 

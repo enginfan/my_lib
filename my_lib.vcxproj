@@ -161,6 +161,7 @@
     <ClInclude Include="SeqList.h" />
     <ClInclude Include="SmartPointer.h" />
     <ClInclude Include="StaticArray.h" />
+    <ClInclude Include="StaticLinkList.h" />
     <ClInclude Include="StaticList.h" />
   </ItemGroup>
   <ItemGroup>
