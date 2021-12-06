@@ -7,6 +7,7 @@ namespace mylib
 	class LinkList :public List <T>
 	{
 	protected:
+		int val;//ÅÐ¶ÏÎö¹¹
 		struct Node :public Object
 		{
 			T value;
@@ -17,7 +18,7 @@ namespace mylib
 		Node* m_current;
 		int m_step;
 		//·â×°ÉêÇë¿Õ¼äº¯ÊýÓï¾ä
-		virtual Node* creat()
+		virtual Node* create()
 		{
 			return new Node();
 		}
@@ -30,13 +31,15 @@ namespace mylib
 		{
 			m_header.next = 0;
 			m_length = 0;
+			val = 1;
 		}
 		bool insert(int i,const T& e)
 		{
 			bool ret = ((i >= 0) && (i <= m_length));
 			if (ret)
 			{
-				Node* node =creat();
+				Node* node =0;
+				node = create();
 				if (node != 0)
 				{
 					Node* current = &m_header;
@@ -65,14 +68,10 @@ namespace mylib
 			bool ret((i >= 0) && (i < m_length));
 			if (ret)
 			{
-				Node* current = &m_header;
-				for (int p = 0; p<i; p++)
-				{
-					current = current->next;
-				}
+				Node* current = posion(i);
 				Node* ToDel = current->next;
 				current->next = ToDel->next;
-				delete ToDel;
+				destroy(ToDel);
 				m_length--;
 			}
 			return ret;
@@ -113,13 +112,16 @@ namespace mylib
 		}
 		void clear()
 		{
+			
 			while (m_header.next)
 			{
 				Node* ToDel = m_header.next;
-				m_header.next =ToDel->next;
-				destroy(ToDel);
+				m_header.next = ToDel->next;
+				delete ToDel;
 			}
 			m_length = 0;
+			
+			
 		}
 		~LinkList()
 		{
