@@ -12,26 +12,23 @@ using namespace mylib;
 
 int main()
 {
-	StaticLinkList<int, 10> sta;
-	for (int i = 0; i < sta.capcity(); i++)
+	StaticLinkList<int,5>list;
+	for (int i = 0; i < 5; i++)
 	{
-		sta.insert(i);
+		list.insert(i);
 	}
-	for (int i = 0; i < sta.capcity(); i++)
+	for (list.move(0, 1); !list.end(); list.next())
 	{
-		int v = 0;
-		sta.get(i,v);
-		cout << "v=" << v << endl;
+		if (list.current() == 3)
+		{
+			list.remove(3);
+			cout << list.current() << endl;
+		}
 	}
-	cout << "sta.length=" << sta.length() << endl;
-	cout << "sta.find(9)=" << sta.find(9) << endl;
-	sta.remove(sta.find(4));
-	for (int i = 0; i < sta.capcity(); i++)
+	for(int i=0;i<list.length();i++)
 	{
-		int v = 0;
-		sta.get(i, v);
-		cout << "v=" << v << endl;
+		cout << list.get(i) << endl;
 	}
-	cout << "down" << endl;
+	
 	return 0;
 }

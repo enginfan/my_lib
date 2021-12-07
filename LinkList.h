@@ -69,10 +69,14 @@ namespace mylib
 			if (ret)
 			{
 				Node* current = posion(i);
-				Node* ToDel = current->next;
+				Node* ToDel = current->next;//current是指向前一位数
+				if (m_current == ToDel)//当current指向Todel时在删除后会报错
+				{
+					next();
+				}
 				current->next = ToDel->next;
+				m_length--;//为了抛异常的安全
 				destroy(ToDel);
-				m_length--;
 			}
 			return ret;
 		}
@@ -106,6 +110,21 @@ namespace mylib
 			}
 			return ret;
 		}
+		T get(int i)
+		{
+			bool ret = ((i >= 0) && (i < m_length));
+			if (ret)
+			{
+				Node* current = &m_header;
+				for (int p = 0; p < i; p++)
+				{
+					current = current->next;
+				}
+				Node* v = current->next;
+				return v->value;
+			}
+			return 0;
+		}
 		int length()const
 		{
 			return m_length;
@@ -117,11 +136,9 @@ namespace mylib
 			{
 				Node* ToDel = m_header.next;
 				m_header.next = ToDel->next;
-				delete ToDel;
+				destroy (ToDel);
 			}
 			m_length = 0;
-			
-			
 		}
 		~LinkList()
 		{
@@ -157,6 +174,8 @@ namespace mylib
 			return ret;
 		}
 		//设置游标优化遍历方法
+		//例如可通过如下过程遍历
+		//for(list.move(0, 1); !list.end(); list.next())
 		bool move(int i, int step = 1)
 		{
 			bool ret((i >= 0) && (i < m_length) && (step > 0));

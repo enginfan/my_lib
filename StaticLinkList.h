@@ -45,7 +45,7 @@ namespace mylib
 				{
 					m_used[i] = 0;
 					psn->~SNode();
-					cout << "destroy_is_worked" << endl;
+					break;
 				}
 			}
 		}
@@ -63,7 +63,8 @@ namespace mylib
 		}
 		~StaticLinkList()
 		{
-			LinkList<T> ::m_header.next = 0;
+			this->clear();//解决父类析构函数释放静态空间报错的问题同时链表内部对象的析构问题
+			//如果粗暴的使用LinkList<T>::m_header.next=0;会使得内部对象无法析构
 		}
 	};
 }

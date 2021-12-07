@@ -1,52 +1,41 @@
 #ifndef SMARTPOINTER_H
 #define SMARTPOINTER_H
-using namespace std;
+#include "Pointer.h"
+
 namespace mylib
 { 
 	template <typename T>
-	class SmartPointer
+	class SmartPointer:public Pointer<T>
 	{
-	protected:
-		T* m_pointer;
 	public:
-		SmartPointer(T* p = 0)
+		SmartPointer():Pointer(p)
 		{
-		m_pointer = p;
-		}
-		T* operator ->()const
-		{
-			return m_pointer;
-		}
-		T& operator *()//此处必须是引用否则没法用.操作符
-		{
-			return *m_pointer;
-		}
-		bool isnull()
-		{
-			return (m_pointer == 0);
-		}
-		T* get()const
-		{
-			return m_pointer;
+
 		}
 		SmartPointer(const SmartPointer<T>& p)
 		{
-			m_pointer = p.m_pointer;
+			this->m_pointer = p.m_pointer;
 			const_cast<SmartPointer<T>&>(p).m_pointer = 0;
 		}
 		SmartPointer<T>& operator=(const SmartPointer<T>& p)
 		{
-			if (*this != &p)
+			if (this != &p)
 			{
-				delete m_pointer;
-				m_pointer = p.m_pointer;
+				//delete m_pointer;这样不够异常安全
+				/*异常安全的意思就是，当程序在异常发生的时候，程序可以回退的很干净。
+				什么是回退的很干净呢？其实就是函数在发生异常的时候不会泄露资源
+				或者不会发生任何数据结构的破坏。如果说一个函数是异常安全的,
+				那么它必须满足上面提到的两个条件。*/
+				T* d = m_pointer;
+				this->m_pointer = p.m_pointer;
 				const_cast<SmartPointer<T>&>(p).m_pointer = 0;
+				delete d;
 			}
 			return *this;
 		}
 		~SmartPointer()
 		{
-			delete m_pointer;
+			delete this->m_pointer;
 		}
 	};
 }

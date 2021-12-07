@@ -4,14 +4,14 @@
 #include <iostream>
 #include "Array.h"
 namespace mylib
-{
+{//¶àÎ¬Êı×éDynamicArray<DynamicArray<int>>d;
 	template <typename T>
 	class DynamicArray :public Array<T>
 	{
 	protected:
 		int m_length;
 	public:
-		DynamicArray(int length)
+		DynamicArray(int length=0)
 		{
 			this->m_array = new T[length];
 			if (this->m_array != NULL)
