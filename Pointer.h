@@ -10,7 +10,7 @@ namespace mylib
 	protected:
 		T* m_pointer;
 	public:
-		Pointer(T* p = 0)
+		Pointer(T* p=0)
 		{
 			m_pointer = p;
 		}

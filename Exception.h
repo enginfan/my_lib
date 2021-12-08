@@ -2,7 +2,7 @@
 #define EXCEPTION_H
 namespace mylib
 {
-#define	THROW_EXCEPTION(e,m)(throw e(m,__file__,11))
+#define	THROW_EXCEPTION(e,m,f,line)(throw e(m,f,line))
 	class Exception 
 	{
 	protected:

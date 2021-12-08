@@ -8,7 +8,7 @@ namespace mylib
 	class SmartPointer:public Pointer<T>
 	{
 	public:
-		SmartPointer():Pointer(p)
+		SmartPointer(int p):Pointer(p)
 		{
 
 		}
@@ -26,7 +26,7 @@ namespace mylib
 				什么是回退的很干净呢？其实就是函数在发生异常的时候不会泄露资源
 				或者不会发生任何数据结构的破坏。如果说一个函数是异常安全的,
 				那么它必须满足上面提到的两个条件。*/
-				T* d = m_pointer;
+				T* d = this->m_pointer;
 				this->m_pointer = p.m_pointer;
 				const_cast<SmartPointer<T>&>(p).m_pointer = 0;
 				delete d;

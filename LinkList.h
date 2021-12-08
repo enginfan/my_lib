@@ -1,6 +1,7 @@
 #ifndef LINKLIST_H_
 #define LINKLIST_H_
 #include "List.h"
+#include "SharedPointer.h"
 namespace mylib
 {
 	template <typename T>
@@ -11,20 +12,26 @@ namespace mylib
 		struct Node :public Object
 		{
 			T value;
-			Node* next;
+			//Node* next;
+			SharedPointer<Node*> next;
 		};
 		mutable Node m_header;
 		int m_length;
-		Node* m_current;
+		//Node* m_current;
+		SharedPointer<Node*> m_current;
 		int m_step;
 		//·â×°ÉêÇë¿Õ¼äº¯ÊýÓï¾ä
-		virtual Node* create()
+		virtual SharedPointer<Node*> create()
 		{
 			return new Node();
 		}
 		virtual void destroy(Node* pn)
 		{
 			delete pn;
+		}
+		void posion()
+		{
+
 		}
 	public:
 		LinkList()

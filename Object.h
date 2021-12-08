@@ -1,5 +1,6 @@
 #ifndef _OBJECT_H_
 #define _OBJECT_H_
+using namespace std;
 namespace mylib
 {
 class Object
