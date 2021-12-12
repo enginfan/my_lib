@@ -45,7 +45,7 @@
     <ClInclude Include="DynamicArray.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="LinkList.h">
+    <ClInclude Include="LinkList_sptr.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="StaticLinkList.h">
@@ -55,6 +55,9 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="SharedPointer.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="CircleList.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

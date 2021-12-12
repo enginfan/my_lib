@@ -26,15 +26,19 @@ public:
 };
 int main()
 {
-	SharedPointer<Test> sp0 = new Test();
-	SharedPointer<Test> sp1 = sp0;
-	SharedPointer<Test> sp2 = NULL;
-	sp2 = sp1;
-	cout << sp0->value << endl;
-	cout << sp1->value << endl;
-	cout << sp2->value << endl;
-	cout << (sp0 == sp1) << endl;
-	sp2.clear();
-	cout << (sp0 != sp2) << endl;
+	LinkList<int> list;
+	for (int i = 0; i < 5; i++)
+	{
+		list.insert(i);
+	}
+	for (list.move(0, 1); !list.end(); list.next())
+	{
+		cout<<list.current()<<endl;
+	}
+	list.remove(1);
+	for (list.move(0, 1); !list.end(); list.next())
+	{
+		cout << list.current() << endl;
+	}
 	return 0;
 }
