@@ -26,19 +26,6 @@ public:
 };
 int main()
 {
-	LinkList<int> list;
-	for (int i = 0; i < 5; i++)
-	{
-		list.insert(i);
-	}
-	for (list.move(0, 1); !list.end(); list.next())
-	{
-		cout<<list.current()<<endl;
-	}
-	list.remove(1);
-	for (list.move(0, 1); !list.end(); list.next())
-	{
-		cout << list.current() << endl;
-	}
+	cout << 8% 7 << endl;
 	return 0;
 }
