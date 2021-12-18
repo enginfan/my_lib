@@ -10,6 +10,8 @@
 #include "StaticLinkList.h"
 #include "SharedPointer.h"
 #include "CircleList.h"
+#include "DualLinkList.h"
+
 using namespace mylib;
 using namespace std;
 class Test :public Object
@@ -45,6 +47,45 @@ void func(int n, int s, int m)
 }
 int main()
 {
-	func(1, 3, 41);
+	DualLinkList<int> list;
+
+	for (int i = 0; i < 5; i++)
+	{
+		list.insert(0,i);
+		list.insert(0,5);
+	}
+
+	for (list.move(list.length()-1, 1); !list.end(); list.pre())
+	{
+		cout << list.current() << endl;
+	}
+
+	for (list.move(0, 1); !list.end(); list.next())
+	{
+		cout << list.current() << endl;
+	}
+
+	list.move(list.length() - 1);
+
+	while (!list.end())
+	{
+		if (list.current() == 5)
+		{
+			cout << "current=" << list.current() << endl;
+
+			list.remove(list.find(list.current()));
+		}
+		else
+		{
+			list.pre();
+		}
+	}
+
+	cout << "list.m_length()=" << list.length() << endl;
+
+	for (list.move(0, 1); !list.end(); list.next())
+	{
+		cout << list.current() << endl;
+	}
 	return 0;
 }

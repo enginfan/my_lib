@@ -10,7 +10,7 @@ namespace mylib
 	{
 	protected:
 		typedef typename LinkList<T>::Node Node;
-		Node* last() const
+		Node* last() const//o(n)
 		{
 			return this->position(this->m_length-1)->next;
 		}
@@ -18,7 +18,7 @@ namespace mylib
 		{
 			last()->next = this->m_header.next;
 		}
-		int mod(int i) const
+		int mod(int i) const//O(1)
 		{
 			return (this->m_length == 0) ? 0 : (i % this->m_length);
 		}

@@ -153,6 +153,7 @@
   <ItemGroup>
     <ClInclude Include="Array.h" />
     <ClInclude Include="CircleList.h" />
+    <ClInclude Include="DualLinkList.h" />
     <ClInclude Include="DynamicArray.h" />
     <ClInclude Include="DynamicList.h" />
     <ClInclude Include="Exception.h" />

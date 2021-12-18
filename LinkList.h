@@ -19,8 +19,9 @@ protected:
 
     mutable struct : public Object
     {
-        char reserved[sizeof(T)];
+        char reserved[sizeof(T)];//ÄÚ´æ¶ÔÆë
         Node* next;
+        Node* pre;
     } m_header;
 
     int m_length;
