@@ -11,6 +11,7 @@
 #include "SharedPointer.h"
 #include "CircleList.h"
 #include "DualLinkList.h"
+#include "DualStaticLinkList.h"
 
 using namespace mylib;
 using namespace std;
@@ -21,6 +22,11 @@ public:
 	Test():value(0)
 	{
 		cout <<"Test" << endl;
+	}
+	Test(int v)
+	{
+		value = v;
+		cout << "Test" << endl;
 	}
 	~Test()
 	{
@@ -47,45 +53,10 @@ void func(int n, int s, int m)
 }
 int main()
 {
-	DualLinkList<int> list;
-
-	for (int i = 0; i < 5; i++)
-	{
-		list.insert(0,i);
-		list.insert(0,5);
-	}
-
-	for (list.move(list.length()-1, 1); !list.end(); list.pre())
-	{
-		cout << list.current() << endl;
-	}
-
-	for (list.move(0, 1); !list.end(); list.next())
-	{
-		cout << list.current() << endl;
-	}
-
-	list.move(list.length() - 1);
-
-	while (!list.end())
-	{
-		if (list.current() == 5)
-		{
-			cout << "current=" << list.current() << endl;
-
-			list.remove(list.find(list.current()));
-		}
-		else
-		{
-			list.pre();
-		}
-	}
-
-	cout << "list.m_length()=" << list.length() << endl;
-
-	for (list.move(0, 1); !list.end(); list.next())
-	{
-		cout << list.current() << endl;
-	}
+	DualStaticLinkList<int, 10> list;
+	
+	list.DualStaticLinkList::insert(1);
+	list.insert(2);
+	list.insert(3);
 	return 0;
 }

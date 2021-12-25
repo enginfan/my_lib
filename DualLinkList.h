@@ -2,7 +2,6 @@
 #define DUALLINKLIST_H
 
 #include "List.h"
-
 namespace mylib//不要按insert，按了会替换而不是插入
 {
 	template <typename T>
@@ -52,11 +51,11 @@ namespace mylib//不要按insert，按了会替换而不是插入
     public:
         DualLinkList()
         {
-            m_header.next = NULL;
+            m_header.next = 0;
             m_header.pre = 0;
             m_length = 0;
             m_step = 1;
-            m_current = NULL;
+            m_current = 0;
         }
 
         bool insert(const T& e)   // O(n)
@@ -87,10 +86,9 @@ namespace mylib//不要按insert，按了会替换而不是插入
                     }
                     else
                     {
-                        node->pre = 0;
+                        node->pre = NULL;
                     }
-
-                    if (next != 0)
+                    if (next != NULL)
                     {
                         next->pre = node;
                     }
@@ -122,7 +120,7 @@ namespace mylib//不要按insert，按了会替换而不是插入
                     m_current = toDel->next;
                 }
 
-                if (next != 0)
+                if (next != NULL)
                 {
                     next->pre = current;
                 }

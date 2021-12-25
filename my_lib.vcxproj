@@ -125,6 +125,7 @@
       <PrecompiledHeader>Create</PrecompiledHeader>
       <PrecompiledHeaderFile>
       </PrecompiledHeaderFile>
+      <LanguageStandard>Default</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -153,11 +154,13 @@
   <ItemGroup>
     <ClInclude Include="Array.h" />
     <ClInclude Include="CircleList.h" />
+    <ClInclude Include="DualCircleList.h" />
     <ClInclude Include="DualLinkList.h" />
     <ClInclude Include="DynamicArray.h" />
     <ClInclude Include="DynamicList.h" />
     <ClInclude Include="Exception.h" />
     <ClInclude Include="LinkList_sptr.h" />
+    <ClInclude Include="LinuxList.h" />
     <ClInclude Include="List.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="Pointer.h" />
@@ -169,6 +172,7 @@
     <ClInclude Include="StaticList.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="DualStaticLinkList.h" />
     <ClCompile Include="my_lib.cpp" />
     <ClCompile Include="Exception.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

@@ -1,6 +1,7 @@
 #ifndef _OBJECT_H_
 #define _OBJECT_H_
 using namespace std;
+#define NULL 0
 namespace mylib
 {
 class Object
