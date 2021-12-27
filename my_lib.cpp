@@ -12,6 +12,7 @@
 #include "CircleList.h"
 #include "DualLinkList.h"
 #include "DualStaticLinkList.h"
+#include "DualCircleList.h"
 
 using namespace mylib;
 using namespace std;
@@ -53,10 +54,41 @@ void func(int n, int s, int m)
 }
 int main()
 {
-	DualStaticLinkList<int, 10> list;
+	DualCircleList<int> list;
 	
-	list.DualStaticLinkList::insert(1);
-	list.insert(2);
-	list.insert(3);
+	for (int i = 0; i < 5; i++)
+	{
+		list.insert(0,1);
+		list.insert(0, 5);
+	}
+
+	for (int i=0; i<list.length(); i++)
+	{
+		cout << list.get(i) << endl;
+	}
+	
+	cout << "begin" << endl;
+
+	list.move(list.length() - 1);
+
+	while (list.find(5) != -1)
+	{
+		if (list.current() == 5)
+		{
+			cout << "list.current()=" <<list.current()<< endl;
+			list.remove(list.find(list.current()));
+		}
+		else
+		{
+			list.pre();
+		}
+	}
+
+	cout << "end" << endl;
+
+	for (int i = 0; i < list.length(); i++)
+	{
+		cout << list.get(i) << endl;
+	}
 	return 0;
 }
