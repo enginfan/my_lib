@@ -137,4 +137,22 @@ namespace mylib
 * 已知n个人（0~n-1）从编号为k的人开始报数，数到m的人开始出列，下一个人又从1开始数
 * 依次重复直到所有人出列
 */
+//void func(int n, int s, int m)//约瑟夫环问题
+//{
+//	CircleList<int> list;
+//	for (int i = 0; i < m; i++)
+//	{
+//		list.insert(i + 1);
+//	}
+//	for (list.move(n-1+s-1,s-1); list.length() > 2;list.next())
+//	{
+//		cout << list.current() << endl;
+//		list.remove(list.find(list.current()));
+//	}
+//	cout << "————————最终剩余————————" << endl;
+//	for (int i = 0; i < list.length(); i++)
+//	{
+//		cout << list.get(i) << endl;
+//	}
+//}
 #endif

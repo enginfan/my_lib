@@ -167,9 +167,11 @@
     <ClInclude Include="SeqList.h" />
     <ClInclude Include="SharedPointer.h" />
     <ClInclude Include="SmartPointer.h" />
+    <ClInclude Include="Stack.h" />
     <ClInclude Include="StaticArray.h" />
     <ClInclude Include="StaticLinkList.h" />
     <ClInclude Include="StaticList.h" />
+    <ClInclude Include="StaticStack.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DualStaticLinkList.h" />
