@@ -75,6 +75,12 @@
     <ClInclude Include="StaticStack.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="LinkList.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="LinkStack.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="my_lib.cpp">

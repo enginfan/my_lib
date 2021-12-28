@@ -10,7 +10,7 @@ namespace mylib
 	class StaticStack :public Stack<T>
 	{
 	protected:
-		T m_space[N];
+		T m_space[N];//缺陷：创建类数组时会一直调用构造函数。
 		int m_top;
 		int m_size;
 	public:

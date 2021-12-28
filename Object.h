@@ -2,6 +2,8 @@
 #define _OBJECT_H_
 using namespace std;
 #define NULL 0
+#define TRUE 1
+#define FALSE 0
 namespace mylib
 {
 class Object

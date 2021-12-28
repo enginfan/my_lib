@@ -1,4 +1,5 @@
 ﻿#include <iostream>
+#include <cstring>
 //#include <cstdlib>
 //#include "Exception.h"
 //#include "SmartPointer.h"
@@ -13,19 +14,26 @@
 //#include "DualLinkList.h"
 //#include "DualStaticLinkList.h"
 //#include "DualCircleList.h"
-#include "StaticStack.h"
-
+//#include "StaticStack.h"
+#include "LinkStack.h"
 using namespace mylib;
 using namespace std;
 class Test :public Object
 {
 public:
 	int value;
-	Test():value(0)
+	string str;
+	Test():value(0),str("null")
 	{
 		cout <<"Test" << endl;
 	}
-	Test(int v)
+	Test(string st)
+	{
+		cout << "Test" << endl;
+		str = st;
+		cout << "Test" << str <<"creat"<< endl;
+	}
+	Test(int v):str("null")
 	{
 		value = v;
 		cout << "Test" << endl;
@@ -33,23 +41,13 @@ public:
 	~Test()
 	{
 		cout << "~Test()" << endl;
+		cout << str << endl;
 	}
 };
 
+
 int main()
 {
-	StaticStack<int,10> list;
-	
-	for (int i = 0; i < 10; i++)
-	{
-		list.push(i);
-	}
 
-	while(list.size()>0)
-	{
-		cout << list.top() << endl;
-		list.pop();
-	}
-	
 	return 0;
 }
