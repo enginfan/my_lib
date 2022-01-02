@@ -124,4 +124,67 @@ bool scan(const char* code)
 }
 */
 
+
+
+//栈实现队列
+// 
+// 
+//template <typename T>
+//class StacktoQueue :public Queue<T>
+//{
+//protected:
+//	mutable LinkStack<T> stack_in;
+//	mutable LinkStack<T> stack_out;
+//	void move()const
+//	{
+//		if (stack_out.size() == 0)
+//		{
+//			while (stack_in.size() > 0)
+//			{
+//				stack_out.push(stack_in.top());
+//				stack_in.pop();
+//			}
+//		}
+//	}
+//public:
+//
+//	void add(const T& e)
+//	{
+//		stack_in.push(e);
+//	}
+//
+//	void remove()
+//	{
+//		move();
+//		if (stack_out.size() != 0)
+//		{
+//			stack_out.pop();
+//		}
+//		else
+//		{
+//			cout << "Error" << endl;
+//		}
+//	}
+//
+//	T front()const
+//	{
+//		move();
+//		return stack_out.top();
+//	}
+//
+//	void clear()
+//	{
+//		stack_in.clear();
+//		stack_out.clear();
+//	}
+//
+//	int length()const
+//	{
+//		return stack_in.size() + stack_out.size();
+//	}
+//	~StacktoQueue()
+//	{
+//		clear();
+//	}
+//};
 #endif

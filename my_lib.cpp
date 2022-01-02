@@ -16,6 +16,9 @@
 //#include "DualCircleList.h"
 //#include "StaticStack.h"
 #include "LinkStack.h"
+//#include "StaticQueue.h"
+#include "LinkQueue.h"
+
 using namespace mylib;
 using namespace std;
 class Test :public Object
@@ -48,6 +51,6 @@ public:
 
 int main()
 {
-
+	
 	return 0;
 }
