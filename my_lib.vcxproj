@@ -177,6 +177,7 @@
     <ClInclude Include="StaticList.h" />
     <ClInclude Include="StaticQueue.h" />
     <ClInclude Include="StaticStack.h" />
+    <ClInclude Include="String.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DualStaticLinkList.h" />
@@ -189,6 +190,7 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">"_CRT_SECURE_NO_WARNINGS";"_CRT_NONSTDC_NO_DEPRECATE";%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <ClCompile Include="Object.cpp" />
+    <ClCompile Include="String.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
