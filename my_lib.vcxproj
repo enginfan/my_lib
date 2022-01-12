@@ -152,6 +152,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="algorithm-problem.h" />
     <ClInclude Include="Array.h" />
     <ClInclude Include="CircleList.h" />
     <ClInclude Include="DualCircleList.h" />
@@ -172,6 +173,7 @@
     <ClInclude Include="SeqList.h" />
     <ClInclude Include="SharedPointer.h" />
     <ClInclude Include="SmartPointer.h" />
+    <ClInclude Include="Sort.h" />
     <ClInclude Include="Stack.h" />
     <ClInclude Include="StaticArray.h" />
     <ClInclude Include="StaticLinkList.h" />

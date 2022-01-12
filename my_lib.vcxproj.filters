@@ -96,6 +96,12 @@
     <ClInclude Include="QueenSolution.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="algorithm-problem.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Sort.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="my_lib.cpp">
