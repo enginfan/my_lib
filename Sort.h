@@ -18,6 +18,50 @@ namespace mylib
 			a = b;
 			b = c;
 		}
+
+		template <typename T>
+		static void Merge(T src[], T helper[], int begin, int mid, int end, bool min2max)
+		{
+			int i = begin;
+			int k = mid + 1;
+			int j = begin;
+			while((i <= mid) && (k <= end))
+			{
+				if (min2max ? (src[i]<=src[k]) : (src[i]>=src[k]))
+				{
+					helper[j++] = src[i++];
+				}
+				else
+				{
+					helper[j++] = src[k++];
+				}
+			}
+			while (i <= mid)
+			{
+				helper[j++] = src[i++];
+			}
+			while (k <= end)
+			{
+				helper[j++] = src[k++];
+			}
+			for (i = begin; i <= end; i++)
+			{
+				src[i] = helper[i];
+			}
+		}
+
+		template <typename T>
+		static void Merge(T src[], T helper[], int begin, int end, bool min2max)
+		{
+			if (begin < end)
+			{
+				int mid = (begin + end) / 2;
+				Merge(src, helper, begin, mid, min2max);
+				Merge(src, helper, mid + 1, end, min2max);
+				Merge(src, helper, begin, mid, end, min2max);
+			}
+		}
+
 	public:
 
 		template<typename T>
@@ -77,7 +121,78 @@ namespace mylib
 			}
 		}
 
+		//≤…”√≤Â»Î≈≈–Úµƒœ£∂˚≈≈–Ú
 		template<typename T>
+		static void Shell(T array[], int len, bool min2max = true)
+		{
+			int d = len;
+			do
+			{
+				d = d / 3 + 1;
+				int u = d;
+				do
+				{
+					for (int i = u; i < len; i += d)
+					{
+						int k = i;
+						T e = array[i];
+						for (int j = i - d; (j >= 0) && (min2max ? array[j] > e:array[j] < e);j -= d)
+						{
+							array[j + d] = array[j];
+							k = j;
+						}
+						if (k != i)
+						{
+							array[k] = e;
+						};
+					}
+					u++;
+				} while (u < 2 * d);
+			} while (d > 1);
+		}
+
+		//≤…”√√∞≈›≈≈–Úµƒœ£∂˚≈≈–Ú
+		template<typename T>
+		static void Shell2(T array[], int len, bool min2max = true)
+		{
+			int d = len;
+			do
+			{
+				d = d / 3 + 1;
+				int u = 0;
+				do
+				{
+					bool exchange = true;
+					for (int i = u; (i<len)&&(exchange); i+=d)
+					{
+						exchange = false;
+						int v = (len - u) / d;
+						for (int j =(u+v*d<len?u+v*d:u+(v-1)*d); j > i; j -= d)
+						{
+							if (min2max ? (array[j]<array[j - d]) : (array[j - d]<array[j]))
+							{
+								swap(array[j], array[j - d]);
+								exchange = true;
+							}
+						}
+					}
+					u++;
+				} while (u<d);
+			} while (d > 1);
+		}
+
+		//πÈ≤¢≈≈–Ú
+		template <typename T>
+		static void Merge(T array[], int len, bool min2max = true)
+		{
+			T* helper = new T[len];
+			if (helper != NULL)
+			{
+				Merge(array, helper,0, len-1, min2max);
+			}
+			delete[] helper;
+		}
+		/*template <typename T>
 		static void Shell(T array[], int len, bool min2max = true)
 		{
 			int d = len;
@@ -99,7 +214,10 @@ namespace mylib
 					}
 				};
 			}while(d > 1);
-		}
+		}*/
+
+
+
 
 	};
 }

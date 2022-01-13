@@ -58,10 +58,10 @@ public:
 
 int main()
 {
-	int array[] = { 3,1,2,5,4 };
-	Sort::Shell(array, 5,true);
+	int array[] = { 3,1,2,5,4 ,6,8};
+	Sort::Merge(array,7,false);
 
-	for (int i = 0; i < 5;i++)
+	for (int i = 0; i < 7;i++)
 	{
 		cout << array[i] << endl;
 	}
