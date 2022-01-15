@@ -5,8 +5,8 @@
 //#include "SmartPointer.h"
 //#include "StaticList.h"
 //#include "DynamicList.h"
-//#include "StaticArray.h"
-//#include "DynamicArray.h"
+#include "StaticArray.h"
+#include "DynamicArray.h"
 //#include "LinkList.h"
 //#include "StaticLinkList.h"
 //#include "SharedPointer.h"
@@ -58,13 +58,28 @@ public:
 
 int main()
 {
-	int array[] = { 3,1,2,5,4 ,6,8};
-	Sort::Merge(array,7,false);
-
-	for (int i = 0; i < 7;i++)
+	StaticArray<int, 10> a1;
+	DynamicArray<int> a2(10);
+	int b[] = { 8,9,5,5,6,7,1,2,10,11 };
+	for (int i = 0; i < 10; i++)
 	{
-		cout << array[i] << endl;
+		a1.set(i, b[i]);
+		a2.set(i, b[i]);
 	}
+
+	for (int i = 0; i < 10; i++)
+	{
+		cout<<a2.get(i)<<endl;
+	}
+
+	Sort::Bubble(a2, true);
+	
+	for (int i = 0; i < 10; i++)
+	{
+		cout << a2.get(i) << endl;
+	}
+
+
 
 	return 0;
 }

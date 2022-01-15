@@ -160,6 +160,8 @@
     <ClInclude Include="DynamicArray.h" />
     <ClInclude Include="DynamicList.h" />
     <ClInclude Include="Exception.h" />
+    <ClInclude Include="GTree.h" />
+    <ClInclude Include="GTreeNode.h" />
     <ClInclude Include="LinkList.h" />
     <ClInclude Include="LinkList_sptr.h" />
     <ClInclude Include="LinkQueue.h" />
@@ -181,6 +183,8 @@
     <ClInclude Include="StaticQueue.h" />
     <ClInclude Include="StaticStack.h" />
     <ClInclude Include="String.h" />
+    <ClInclude Include="Tree.h" />
+    <ClInclude Include="TreeNode.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DualStaticLinkList.h" />

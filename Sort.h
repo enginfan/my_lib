@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Object.h"
+#include "Array.h"
 
 namespace mylib
 {
@@ -59,6 +60,38 @@ namespace mylib
 				Merge(src, helper, begin, mid, min2max);
 				Merge(src, helper, mid + 1, end, min2max);
 				Merge(src, helper, begin, mid, end, min2max);
+			}
+		}
+
+
+		template <typename T>
+		static int partition(T array[], int begin, int end, bool min2max )
+		{
+			T pv = array[begin];
+			while (begin < end)
+			{
+				while ((begin < end) && (min2max ? (array[end] > pv) : (array[end] < pv)))
+				{
+					end--;
+				}
+				swap(array[begin], array[end]);
+				while ((begin < end) && (min2max ? (array[begin] <= pv) : (array[begin] >= pv)))
+				{
+					begin++;
+				}
+				swap(array[begin], array[end]);
+			}
+			return begin;
+		}
+
+		template<typename T>
+		static void Quik(T array[], int begin,int end, bool min2max)
+		{
+			if (begin < end)
+			{
+				int pivot = partition(array, begin, end, min2max);
+				Quik(array, begin, pivot - 1, min2max);
+				Quik(array, pivot + 1, end, min2max);
 			}
 		}
 
@@ -192,6 +225,13 @@ namespace mylib
 			}
 			delete[] helper;
 		}
+
+		template<typename T>
+		static void Quik(T array[], int len, bool min2max = true)
+		{
+			Quik(array, 0, len - 1, min2max);
+		}
+
 		/*template <typename T>
 		static void Shell(T array[], int len, bool min2max = true)
 		{
@@ -216,8 +256,40 @@ namespace mylib
 			}while(d > 1);
 		}*/
 
+		template<typename T>
+		static void Select(Array<T>& array, bool min2max=true)
+		{
+			Select(array.array(), array.length(), min2max);
+		}
 
+		template<typename T>
+		static void Insert(Array<T>& array, bool min2max = true)
+		{
+			Insert(array.array(),array.length(),min2max );
+		}
 
+		template <typename T>
+		static void Bubble(Array<T>& array, bool min2max = true)
+		{
+			Bubble(array.array(), array.length(), min2max);
+		}
 
+		template <typename T>
+		static void Shell(Array<T>& array,bool min2max=true)
+		{
+			Shell(array.array(), array.length(), min2max);
+		}
+
+		template <typename T>
+		static void Merge(Array<T>& array, bool min2max = true)
+		{
+			Merge(array.array(), array.length(), min2max);
+		}
+
+		template <typename T>
+		static void Quik(Array<T>& array, bool min2max = true)
+		{
+			Quik(array.array(), array.length(), min2max);
+		}
 	};
 }
