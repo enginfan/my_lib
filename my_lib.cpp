@@ -21,6 +21,8 @@
 #include "String.h"
 //#include "QueenSolution.h"
 #include "Sort.h"
+#include "GTree.h"
+#include "GTreeNode.h"
 
 using namespace mylib;
 using namespace std;
@@ -58,28 +60,56 @@ public:
 
 int main()
 {
-	StaticArray<int, 10> a1;
-	DynamicArray<int> a2(10);
-	int b[] = { 8,9,5,5,6,7,1,2,10,11 };
-	for (int i = 0; i < 10; i++)
-	{
-		a1.set(i, b[i]);
-		a2.set(i, b[i]);
-	}
+	GTree<char> t;
+	GTreeNode<char>* node = NULL;
+	GTreeNode<char> root;
 
-	for (int i = 0; i < 10; i++)
-	{
-		cout<<a2.get(i)<<endl;
-	}
+	root.value = 'A';
+	root.parent = NULL;
+	t.insert('F', &root);
 
-	Sort::Bubble(a2, true);
+
+	node = t.find('A');
+	t.insert('B', node);
+	t.insert('C', node);
+	t.insert('D', node);
+
+	node = t.find('B');
+	t.insert('E', node);
+	t.insert('F', node);
 	
-	for (int i = 0; i < 10; i++)
+	node = t.find('D');
+	t.insert('H', node);
+	t.insert('I', node);
+	t.insert('G', node);
+
+	node = t.find('E');
+	t.insert('K', node);
+	t.insert('L', node);
+
+	node = t.find('C');
+	t.insert('G', node);
+
+	node = t.find('G');
+	t.insert('N', node);
+
+	node = t.find('H');
+	t.insert('M', node);
+
+	t.clear();
+
+	/*char* s = "KLFGMIF";
+	for (int i = 0; i < 7; i++)
 	{
-		cout << a2.get(i) << endl;
-	}
+		TreeNode<char>* node = t.find(s[i]);
 
-
+		while (node != NULL)
+		{
+			cout << node->value << " ";
+			node = node->parent;
+		}
+		cout << endl;
+	}*/
 
 	return 0;
 }

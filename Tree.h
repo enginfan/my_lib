@@ -3,6 +3,7 @@
 #define TREE_H
 #include "Object.h"
 #include "TreeNode.h"
+#include "SharedPointer.h"
 
 namespace mylib
 {

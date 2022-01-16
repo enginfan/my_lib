@@ -14,7 +14,7 @@ namespace mylib
         TreeNode(const TreeNode<T>&);
         TreeNode<T>& operator = (const TreeNode<T>&);
 
-        void* operator new(unsigned int size) throw()
+        void* operator new(size_t size) throw()
         {
             return Object::operator new(size);
         }
