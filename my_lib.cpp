@@ -9,7 +9,7 @@
 #include "DynamicArray.h"
 //#include "LinkList.h"
 //#include "StaticLinkList.h"
-//#include "SharedPointer.h"
+#include "SharedPointer.h"
 //#include "CircleList.h"
 //#include "DualLinkList.h"
 //#include "DualStaticLinkList.h"
@@ -96,12 +96,12 @@ int main()
 	node = t.find('H');
 	t.insert('M', node);
 
-	t.clear();
+	SharedPointer<Tree<char>>p=t.remove(t.find('H'));
 
-	/*char* s = "KLFGMIF";
+	char* s = "KLFGMIF";
 	for (int i = 0; i < 7; i++)
 	{
-		TreeNode<char>* node = t.find(s[i]);
+		TreeNode<char>* node = p->find(s[i]);
 
 		while (node != NULL)
 		{
@@ -109,7 +109,10 @@ int main()
 			node = node->parent;
 		}
 		cout << endl;
-	}*/
+	}
 
+	cout << p.get()->degree() << endl;
+
+	
 	return 0;
 }

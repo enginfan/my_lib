@@ -5,6 +5,7 @@
 #include "Tree.h"
 #include "GTreeNode.h"
 
+
 namespace mylib
 {
 	template<typename T>
@@ -69,6 +70,80 @@ namespace mylib
                 }
             }
         }
+
+        void remove(GTreeNode<T>* node, GTree<T>*& ret)
+        {
+            ret = new GTree<T>();
+            
+            if (ret == NULL)
+            {
+
+            }
+            else
+            {
+                if (root() == node)
+                {
+                    this->m_root == NULL;
+                }
+                else
+                {
+                    LinkList<GTreeNode<T>*>& child = dynamic_cast<GTreeNode<T>*>(node->parent)->child;
+                    child.remove(child.find(node));
+                    node->parent = NULL;
+                }
+                ret->m_root = node;
+            }
+        }
+
+        int count(GTreeNode<T>* node)const
+        {
+            int ret = 0;
+            if (node != NULL)
+            {
+                ret = 1;
+                for (node->child.move(0, 1); !node->child.end(); node->child.next())
+                {
+                    ret += count(node->child.current());
+                }
+            }
+            return ret;
+        }
+
+        int height(GTreeNode<T>* node)const
+        {
+            int ret = 0;
+            if (node != NULL)
+            {
+                for (node->child.move(0); !node->child.end(); node->child.next())
+                {
+                    int h = height(node->child.current());
+                    if (ret < h)
+                    {
+                        ret = h;
+                    }
+                }
+            }
+            return ret=ret+1;
+        }
+
+        int degree(GTreeNode<T>* node)const
+        {
+            int ret = 0;
+            if (node != NULL)
+            {
+                ret= node->child.length();
+                for (node->child.move(0); !node->child.end(); node->child.next())
+                {
+                    int d = degree(node->child.current());
+                    if (ret < d)
+                    {
+                        ret = d;
+                    }
+                }
+            }
+            return ret;
+        }
+
 	public:
         bool insert(TreeNode<T>* node)
         {
@@ -125,13 +200,35 @@ namespace mylib
             return ret;
         }
 
-        SharedPointer<Tree<T>> remove(const T& value)
+        SharedPointer<Tree<T>> remove(const T& value)//通过智能指针访问堆空间中的数据
         {
-            return 0;
+            GTree<T>* ret = NULL;
+            GTreeNode<T>* node = find(value);
+            if (value == NULL)
+            {
+
+            }
+            else
+            {
+                remove(node, ret);
+
+            }
+            return ret;
         }
         SharedPointer<Tree<T>> remove(TreeNode<T>* node)
         {
-            return 0;
+            GTree<T>* ret = NULL;
+            node = find(node);//父类指针可以指向子类指针
+
+            if (node == NULL)
+            {
+
+            }
+            else
+            {
+                remove(dynamic_cast<GTreeNode<T>*>(node), ret);
+            }
+            return ret;
         }
         GTreeNode<T>* find(const T& value) const
         {
@@ -147,15 +244,15 @@ namespace mylib
         }
         int degree() const
         {
-            return 0;
+            return degree(root());
         }
         int count() const
         {
-            return 0;
+            return count(root());
         }
         int height() const
         {
-            return 0;
+            return height(root());
         }
         void clear()
         {
