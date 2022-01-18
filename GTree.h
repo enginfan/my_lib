@@ -4,7 +4,7 @@
 
 #include "Tree.h"
 #include "GTreeNode.h"
-
+#include "LinkQueue.h"
 
 namespace mylib
 {
@@ -12,6 +12,11 @@ namespace mylib
 	class GTree :public Tree<T>
 	{
     protected:
+        LinkQueue<GTreeNode<T>*> m_queue;
+
+        GTree(const GTree<T>&);
+        GTree<T>& operator=(const GTree<T>&);//通用树结构对象不能被复制
+
         GTreeNode<T>* find(GTreeNode<T>* node, const T& value)const
         {
             GTreeNode<T>* ret = NULL;
@@ -145,6 +150,12 @@ namespace mylib
         }
 
 	public:
+
+        GTree()
+        {
+
+        }
+
         bool insert(TreeNode<T>* node)
         {
             bool ret = true;
@@ -211,6 +222,7 @@ namespace mylib
             else
             {
                 remove(node, ret);
+                m_queue.clear();//队列清空，否则列中数据可能出问题。
 
             }
             return ret;
@@ -227,6 +239,7 @@ namespace mylib
             else
             {
                 remove(dynamic_cast<GTreeNode<T>*>(node), ret);
+                m_queue.clear();
             }
             return ret;
         }
@@ -257,26 +270,73 @@ namespace mylib
         void clear()
         {
             free(root());
-            m_root = NULL;
+            this->m_root = NULL;
+            m_queue.clear();
         }
         bool begin()
         {
-            return 0;
+            bool ret = (root()!=NULL);
+
+            if (ret)
+            {
+                m_queue.clear();
+                m_queue.add(root());
+            }
+
+            return ret;
         }
+
         bool end()
         {
-            return 0;
+            return (m_queue.length() == 0);
         }
+
         bool next()
         {
-            return 0;
+            bool ret=(m_queue.length()!=0);
+
+            if (ret)
+            {
+                GTreeNode<T>* node = m_queue.front();
+                m_queue.remove();
+                for (node->child.move(0); !node->child.end(); node->child.next())
+                {
+                    m_queue.add(node->child.current());
+                }
+            }
+            return ret;
         }
+
         T current()
         {
-            return 0;
+            if (!end())
+            {
+                return m_queue.front()->value;
+            }
+            else
+            {
+
+            }
+        }
+        ~GTree()
+        {
+            clear();
         }
 	};
 }
+//查找算法
+/*char* s = "KLFGMIF";
+    for (int i = 0; i < 7; i++)
+    {
+        TreeNode<char>* node = t.find(s[i]);
+
+        while (node != NULL)
+        {
+            cout << node->value << " ";
+            node = node->parent;
+        }
+        cout << endl;
+    }*/
 
 #endif // !GTREE_H
 

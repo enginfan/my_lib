@@ -62,12 +62,8 @@ int main()
 {
 	GTree<char> t;
 	GTreeNode<char>* node = NULL;
-	GTreeNode<char> root;
 
-	root.value = 'A';
-	root.parent = NULL;
-	t.insert('F', &root);
-
+	t.insert('A',NULL);
 
 	node = t.find('A');
 	t.insert('B', node);
@@ -81,7 +77,7 @@ int main()
 	node = t.find('D');
 	t.insert('H', node);
 	t.insert('I', node);
-	t.insert('G', node);
+	t.insert('J', node);
 
 	node = t.find('E');
 	t.insert('K', node);
@@ -90,29 +86,17 @@ int main()
 	node = t.find('C');
 	t.insert('G', node);
 
-	node = t.find('G');
-	t.insert('N', node);
-
 	node = t.find('H');
 	t.insert('M', node);
 
-	SharedPointer<Tree<char>>p=t.remove(t.find('H'));
+	cout <<"t.degree()=" << t.degree() << endl;
+	cout <<"t.height()=" << t.height() << endl;
+	cout <<"t.count()=" << t.count() << endl;
 
-	char* s = "KLFGMIF";
-	for (int i = 0; i < 7; i++)
+	for (t.begin(); !t.end(); t.next())
 	{
-		TreeNode<char>* node = p->find(s[i]);
-
-		while (node != NULL)
-		{
-			cout << node->value << " ";
-			node = node->parent;
-		}
-		cout << endl;
+		cout << t.current() << endl;
 	}
-
-	cout << p.get()->degree() << endl;
-
 	
 	return 0;
 }
