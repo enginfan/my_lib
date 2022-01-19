@@ -154,6 +154,8 @@
   <ItemGroup>
     <ClInclude Include="algorithm-problem.h" />
     <ClInclude Include="Array.h" />
+    <ClInclude Include="BTree.h" />
+    <ClInclude Include="BTreeNode.h" />
     <ClInclude Include="CircleList.h" />
     <ClInclude Include="DualCircleList.h" />
     <ClInclude Include="DualLinkList.h" />

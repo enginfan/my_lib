@@ -14,7 +14,7 @@ namespace mylib
 		TreeNode<T>* m_root;
 
         Tree(const Tree<T>&);
-        Tree<T>& operator = (const Tree<T>&);
+        Tree<T>& operator = (const Tree<T>&); //树结构对象不能被复制
     public:
         Tree() { m_root = NULL; }
         virtual bool insert(TreeNode<T>* node) = 0;

@@ -14,8 +14,7 @@ namespace mylib
     protected:
         LinkQueue<GTreeNode<T>*> m_queue;
 
-        GTree(const GTree<T>&);
-        GTree<T>& operator=(const GTree<T>&);//通用树结构对象不能被复制
+
 
         GTreeNode<T>* find(GTreeNode<T>* node, const T& value)const
         {

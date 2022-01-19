@@ -12,12 +12,14 @@ namespace mylib
         bool m_flag;
 
         TreeNode(const TreeNode<T>&);
+
         TreeNode<T>& operator = (const TreeNode<T>&);
 
         void* operator new(size_t size) throw()
         {
             return Object::operator new(size);
         }
+
     public:
         T value;
         TreeNode<T>* parent;
