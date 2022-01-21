@@ -65,6 +65,9 @@ int main()
 	
 	BTree<int> bt;
 	BTreeNode<int>* n=NULL;
+
+	BTree<int>* btd=NULL;
+
 	bt.insert(1,NULL);
 
 	n=bt.find(1);
@@ -89,6 +92,10 @@ int main()
 	n = bt.find(6);
 	bt.insert(11,n,LEFT);
 
+	
+	
+	//bt.remove(3);
+
 	int a[] = { 8,9,10,11,7 };
 
 	for (int i = 0; i < 5; i++)
@@ -100,6 +107,19 @@ int main()
 			node = dynamic_cast<BTreeNode<int>*>(node->parent);
 		}
 		cout << endl;
+	}
+
+	for (bt.begin(); !bt.end(); bt.next())
+	{
+		cout << bt.current() << endl;
+	}
+	SharedPointer<Array<int>> sp = NULL;
+
+	sp = bt.traversal(PosteOrder);
+	cout << (*sp).length() << endl;
+	for (int i = 0; i < (*sp).length(); i++)
+	{
+		cout << (*sp)[i] << " ";
 	}
 
 	return 0;

@@ -7,12 +7,20 @@
 #include "LinkQueue.h"
 #include "DynamicArray.h"
 
+
 namespace mylib
 {
+    enum BTTraversal
+    {
+        PreOrder,
+        InOrder,
+        PostOrder
+    };
 	template<typename T>
 	class BTree :public Tree<T>
 	{
     protected:
+        LinkQueue<BTreeNode<T>*> m_queue;
        virtual BTreeNode<T>* find(BTreeNode<T>* node, const T& value)const//const T& value const是限制value值不变
         {
             BTreeNode<T>* ret = NULL;
@@ -109,6 +117,132 @@ namespace mylib
             return ret;
         }
 
+        virtual void remove(BTreeNode<T>* node, BTree<T>* &ret)
+        {
+            ret = new BTree<T>();
+            if (ret)
+            {
+                if (node == m_root)
+                {
+                    this->m_root = NULL;
+                }
+                else
+                {
+                    BTreeNode<T>* parent = dynamic_cast<BTreeNode<T>*>(node->parent);
+
+                    if (parent->left == node)
+                    {
+                        parent->left = NULL;
+                    }
+                    if (parent->right == node)
+                    {
+                        parent->right = NULL;
+                    }
+                    node->parent = NULL;
+                }
+            }
+            ret->m_root = node;
+        }
+
+        virtual void free(BTreeNode<T>* node)
+        {
+            if (node)
+            {
+                free(node->left);
+                free(node->right);
+
+                if (node->flag() == true)
+                {
+                    delete node;
+                }
+            }
+        }
+
+        int count(BTreeNode<T>* node)const
+        {
+            return (node?(count(node->left)+count(node->right)+1):0);
+        }
+
+        int height(BTreeNode<T>* node)const
+        {
+            int ret = 0;
+            if (node)
+            {
+                int hl = height(node->left);
+                int hr = height(node->right);
+                ret = ((hl > hr) ? hl : hr)+1;
+            }
+            return ret;
+        }
+
+        int degree(BTreeNode<T>* node)const
+        {
+            int ret = 0;
+            if (node != NULL)
+            {
+                BTreeNode<T>* child[] = { node->left,node->right };
+                ret = !!node->left + !!node->right;//!是逻辑操作符只会返回0 OR 1
+                for (int i = 0; (i < 2) && (ret < 2); i++)
+                {
+                    int d = degree(child[i]);
+                    if (ret < d)
+                    {
+                        ret = d;
+                    }
+                }
+            }
+            return ret;
+        }
+
+        void preOrderTraversal(BTreeNode<T>* node, LinkQueue<BTreeNode<T>*> &queue)
+        {
+            if (node)
+            {
+                queue.add(node);
+                preOrderTraversal(node->left,queue);
+                preOrderTraversal(node->right,queue);
+            }
+        }
+
+        void inOrderTraversal(BTreeNode<T>* node, LinkQueue<BTreeNode<T>*>& queue)
+        {
+            if (node)
+            {
+                inOrderTraversal(node->left,queue);
+                queue.add(node);
+                inOrderTraversal(node->right,queue);
+            }
+        }
+
+        void postOrderTraversal(BTreeNode<T>* node, LinkQueue<BTreeNode<T>*>& queue)
+        {
+            if (node)
+            {
+                postOrderTraversal(node->left,queue);
+                postOrderTraversal(node->right,queue);
+                queue.add(node);
+            }
+        }
+
+        void traversal(BTTraversal order, LinkQueue<BTreeNode<T>*>& queue)
+        {
+            switch (order)
+            {
+            case PreOrder:
+                preOrderTraversal(root(), queue);
+                break;
+            case InOrder:
+                inOrderTraversal(root(), queue);
+                break;
+            case PostOrder:
+                postOrderTraversal(root(), queue);
+                break;
+            default:
+
+                break;
+            }
+        }
+
 	public:
         bool insert(TreeNode<T>* node)
         {
@@ -177,12 +311,26 @@ namespace mylib
 
         SharedPointer< Tree<T> > remove(const T& value)
         {
-            return NULL;
+            BTree<T>* ret = NULL;
+            BTreeNode<T>* node = find(value);
+            if (node)
+            {
+                remove(node, ret);
+            }
+            return ret;
         }
 
         SharedPointer< Tree<T> > remove(TreeNode<T>* node)
         {
-            return NULL;
+           BTree<T>* ret = NULL;
+
+            node = find(node);
+
+            if (node)
+            {
+               remove(dynamic_cast<BTreeNode<T>*>(node), ret);
+            }
+            return ret;
         }
 
         BTreeNode<T>* find(const T& value) const
@@ -207,47 +355,84 @@ namespace mylib
 
         int degree() const
         {
-            return 0;
+            return degree(root());
         }
         int count() const
         {
-            return 0;
+            return count(root());
         }
 
         int height() const
         {
-            return 0;
+            return height(root());
         }
 
         void clear()
         {
-
+            free(root());
+            this->m_root = NULL;
+            m_queue.clear();
         }
 
         bool begin()
         {
-            bool ret = true;
-
+            bool ret = (root() != NULL);
+            if (ret)
+            {
+                m_queue.clear();
+                m_queue.add(root());
+            }
             return ret;
         }
 
         bool end()
         {
-            bool ret = true;
-
-            return ret;
+            return (m_queue.length()==0);
         }
 
         bool next()
         {
-            bool ret = true;
-
+            bool ret = (m_queue.length()>0);
+            if (ret)
+            {
+                BTreeNode<T>* parent=m_queue.front();
+                if (parent->left)
+                {
+                    m_queue.add(parent->left);
+                }
+                if (parent->right)
+                {
+                    m_queue.add(parent->right);
+                }
+                m_queue.remove();
+            }
             return ret;
         }
 
         T current()
         {
-            return NULL;
+            if (!end())
+            {
+                return m_queue.front()->value;
+            }
+        }
+
+        SharedPointer<Array<T>>traversal(BTTraversal order)
+        {
+            DynamicArray<T>* ret = NULL;
+            LinkQueue<BTreeNode<T>*> queue;
+            traversal(order, queue);
+            
+            ret = new DynamicArray<T>(queue.length());
+
+            if (ret)
+            {
+                for (int i = 0; i < ret->length(); i++, queue.remove())
+                {
+                    ret->set(i, queue.front()->value);
+                }
+            }
+            return ret;
         }
 
         ~BTree()
