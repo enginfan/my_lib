@@ -93,34 +93,64 @@ int main()
 	bt.insert(11,n,LEFT);
 
 	
-	
-	//bt.remove(3);
 
-	int a[] = { 8,9,10,11,7 };
+	BTreeNode<int>* lbt = bt.thread(PostOrder);
+
+	while (lbt)
+	{
+		cout << lbt->value << endl;
+		lbt = lbt->right;
+	}
+
+	/*BTree<int> nbt;
+
+	nbt.insert(0, NULL);
+
+	n = nbt.find(0);
+	nbt.insert(6, n, LEFT);
+	nbt.insert(2, n, RIGHT);
+
+	n = nbt.find(2);
+	nbt.insert(7, n, LEFT);
+	nbt.insert(8, n, RIGHT);
+
+	SharedPointer<BTree<int>>sbt=nbt.add(bt);
+
+	for ((*sbt).begin(); !(*sbt).end(); (*sbt).next())
+	{
+		cout << (*sbt).current() << endl;
+	}*/
+	//SharedPointer<BTree<int>> btclone = bt.clone();
+	
+	
+
+	/*int a[] = { 8,9,10,11,7 };
 
 	for (int i = 0; i < 5; i++)
 	{
-		BTreeNode<int>* node = bt.find(a[i]);
+		BTreeNode<int>* node = (*btclone).find(a[i]);
 		while (node)
 		{
 			cout << node->value << " ";
 			node = dynamic_cast<BTreeNode<int>*>(node->parent);
 		}
 		cout << endl;
-	}
+	}*/
 
-	for (bt.begin(); !bt.end(); bt.next())
+	//cout << "bt==btclone:" << (bt == (*btclone)) << endl;
+
+	/*for (bt.begin(); !bt.end(); bt.next())
 	{
 		cout << bt.current() << endl;
 	}
 	SharedPointer<Array<int>> sp = NULL;
 
-	sp = bt.traversal(PosteOrder);
+	sp = bt.traversal(PostOrder);
 	cout << (*sp).length() << endl;
 	for (int i = 0; i < (*sp).length(); i++)
 	{
 		cout << (*sp)[i] << " ";
-	}
+	}*/
 
 	return 0;
 }

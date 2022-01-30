@@ -14,7 +14,8 @@ namespace mylib
     {
         PreOrder,
         InOrder,
-        PostOrder
+        PostOrder,
+        LevelOrder
     };
 	template<typename T>
 	class BTree :public Tree<T>
@@ -224,6 +225,29 @@ namespace mylib
             }
         }
 
+        void LevelOrderTraversal(BTreeNode<T>* node, LinkQueue<BTreeNode<T>*>& queue)
+        {
+            if (node)
+            {
+                LinkQueue<BTreeNode<T>*> tmp;
+                tmp.add(node);
+                while (tmp.length() > 0)
+                {
+                    BTreeNode<T>* n = tmp.front();
+                    if (n->left)
+                    {
+                        tmp.add(n->left);
+                    }
+                    if (n->right)
+                    {
+                        tmp.add(n->right);
+                    }
+                    tmp.remove();
+                    queue.add(n);
+                }
+            }
+        }
+
         void traversal(BTTraversal order, LinkQueue<BTreeNode<T>*>& queue)
         {
             switch (order)
@@ -237,10 +261,103 @@ namespace mylib
             case PostOrder:
                 postOrderTraversal(root(), queue);
                 break;
+            case LevelOrder:
+                LevelOrderTraversal(root(), queue);
+                break;
             default:
 
                 break;
             }
+        }
+
+        BTreeNode<T>* clone(BTreeNode<T>* node)const
+        {
+            BTreeNode<T>* ret = NULL;
+            if (node)
+            {
+                ret= BTreeNode<T>::NewNode();
+                if (ret)
+                {
+                    ret->value = node->value;
+                    ret->left = clone(node->left);
+                    ret->right = clone(node->right);
+                    if (ret->left)
+                    {
+                        ret->left->parent = ret;
+                    }
+                    if (ret->right)
+                    {
+                        ret->right->parent = ret;
+                    }
+                }
+            }
+            return ret;
+        }
+
+        bool equal(BTreeNode<T>* lh, BTreeNode<T>* rh)
+        {
+            if (lh == rh)//比较地址，判断是否是和自身比较
+            {
+                return true;
+            }
+            else if ((lh != NULL) && (rh != NULL))
+            {
+                return (lh->value == rh->value) && equal(lh->left, rh->left) && equal(lh->right, rh->right);
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        BTreeNode<T>* add(BTreeNode<T>* lh, BTreeNode<T>* rh)
+        {
+            BTreeNode<T>* ret = NULL;
+            if ((lh == NULL) && (rh != NULL))
+            {
+                ret = clone(rh);
+            }
+            else if ((lh != NULL) && (rh == NULL))
+            {
+                ret = clone(lh);
+            }
+            else if ((lh != NULL) && (rh != NULL))
+            {
+                ret = BTreeNode<T>::NewNode();
+                ret->value = lh->value + rh->value;
+                ret->left = add(lh->left, rh->left);
+                ret->right = add(lh->right, rh->right);
+                if (ret->left)
+                {
+                    ret->left->parent = ret;
+                }
+                if (ret->right)
+                {
+                    ret->right->parent = ret;
+                }
+            }
+            return ret;
+        }
+
+        BTreeNode<T>* connect(LinkQueue<BTreeNode<T>*>& queue)
+        {
+            BTreeNode<T>* ret = NULL;
+            if (queue.length() > 0)
+            {
+                ret = queue.front();
+                BTreeNode<T>* slider = queue.front();
+                slider->left = NULL;
+                queue.remove();
+                while (queue.length() > 0)
+                {
+                    slider->right = queue.front();
+                    queue.front()->left = slider;
+                    slider = queue.front();
+                    queue.remove();
+                }
+                slider->right = NULL;
+            }
+            return ret;
         }
 
 	public:
@@ -420,7 +537,7 @@ namespace mylib
         SharedPointer<Array<T>>traversal(BTTraversal order)
         {
             DynamicArray<T>* ret = NULL;
-            LinkQueue<BTreeNode<T>*> queue;
+            LinkQueue<BTreeNode<T>*> queue;//queue 只是完成数据排列的手段完成后可以销毁
             traversal(order, queue);
             
             ret = new DynamicArray<T>(queue.length());
@@ -431,6 +548,53 @@ namespace mylib
                 {
                     ret->set(i, queue.front()->value);
                 }
+            }
+            return ret;
+        }
+
+        BTreeNode<T>* thread(BTTraversal order)
+        {
+            BTreeNode<T>* ret = NULL;
+            LinkQueue<BTreeNode<T>*> queue;
+
+            traversal(order, queue);
+
+            ret=connect(queue);
+
+            this->m_root = NULL;
+
+            m_queue.clear();
+
+            return ret;
+        }
+
+        SharedPointer<BTree<T>>clone()const
+        {
+            BTree<T>* ret = new BTree<T>();
+
+            if (ret)
+            {
+                ret->m_root = clone(root());
+            }
+            return ret;
+        }
+
+        bool operator==(const BTree<T>& btree)
+        {
+            return equal(root(),btree.root());
+        }
+
+        bool operator!=(const BTree<T>& btree)
+        {
+            return !(*this == btree);
+        }
+
+        SharedPointer<BTree<T>>add(const BTree<T>& btree)
+        {
+            BTree<T>* ret = new BTree<T>();
+            if (ret)
+            {
+                ret->m_root = add(root(), btree.root());
             }
             return ret;
         }
