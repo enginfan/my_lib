@@ -120,6 +120,18 @@
     <ClInclude Include="BTree.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="Tree_problem.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Graph.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="MatrixGraph.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ListGraph.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="my_lib.cpp">

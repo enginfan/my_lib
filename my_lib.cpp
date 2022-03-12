@@ -25,6 +25,9 @@
 #include "GTreeNode.h"
 #include "BTree.h"
 #include "BTreeNode.h"
+#include "Tree_problem.h"
+#include "MatrixGraph.h"
+#include "ListGraph.h"
 
 using namespace mylib;
 using namespace std;
@@ -62,95 +65,38 @@ public:
 
 int main()
 {
-	
-	BTree<int> bt;
-	BTreeNode<int>* n=NULL;
+	ListGraph<char, int>g;
+	  
+	g.addVertex('A');
+	g.addVertex('B');
+	g.addVertex('C');
+	g.addVertex('D');
 
-	BTree<int>* btd=NULL;
 
-	bt.insert(1,NULL);
-
-	n=bt.find(1);
-	bt.insert(2, n);
-	bt.insert(3, n);
-
-	n = bt.find(2);
-	bt.insert(4, n);
-	bt.insert(5, n);
-	
-	n = bt.find(4);
-	bt.insert(8, n);
-	bt.insert(9, n);
-
-	n = bt.find(5);
-	bt.insert(10, n);
-	
-	n = bt.find(3);
-	bt.insert(6, n);
-	bt.insert(7, n);
-
-	n = bt.find(6);
-	bt.insert(11,n,LEFT);
-
-	
-
-	BTreeNode<int>* lbt = bt.thread(PostOrder);
-
-	while (lbt)
+	for (int i = 0; i < g.vCount(); i++)
 	{
-		cout << lbt->value << endl;
-		lbt = lbt->right;
+		cout << i << ":" << g.getVertex(i)<<endl;
 	}
+	cout << g.vCount() << endl;
+	cout << g.setEdge(0, 1, 5);
+	cout << g.setEdge(0, 3, 5);
+	cout << g.setEdge(1, 2, 8);
+	cout << g.setEdge(2, 3, 2);
+	cout << g.setEdge(3, 1, 9) << endl;
 
-	/*BTree<int> nbt;
+	cout << "W(0,1):" << g.getEdge(0, 1) << endl;
+	cout << "W(0,3):" << g.getEdge(0, 3) << endl;
+	cout << "W(1,2):" << g.getEdge(1, 2) << endl;
+	cout << "W(2,3):" << g.getEdge(2, 3) << endl;
+	cout << "W(3,1):" << g.getEdge(3, 1) << endl;
 
-	nbt.insert(0, NULL);
+	g.removeEdge(3, 1);
 
-	n = nbt.find(0);
-	nbt.insert(6, n, LEFT);
-	nbt.insert(2, n, RIGHT);
+	SharedPointer<Array<int>> aj = g.getAdjacent(0);
 
-	n = nbt.find(2);
-	nbt.insert(7, n, LEFT);
-	nbt.insert(8, n, RIGHT);
-
-	SharedPointer<BTree<int>>sbt=nbt.add(bt);
-
-	for ((*sbt).begin(); !(*sbt).end(); (*sbt).next())
+	for (int i = 0; i < aj->length(); i++)
 	{
-		cout << (*sbt).current() << endl;
-	}*/
-	//SharedPointer<BTree<int>> btclone = bt.clone();
-	
-	
-
-	/*int a[] = { 8,9,10,11,7 };
-
-	for (int i = 0; i < 5; i++)
-	{
-		BTreeNode<int>* node = (*btclone).find(a[i]);
-		while (node)
-		{
-			cout << node->value << " ";
-			node = dynamic_cast<BTreeNode<int>*>(node->parent);
-		}
-		cout << endl;
-	}*/
-
-	//cout << "bt==btclone:" << (bt == (*btclone)) << endl;
-
-	/*for (bt.begin(); !bt.end(); bt.next())
-	{
-		cout << bt.current() << endl;
+		cout << (*aj)[i] << endl;
 	}
-	SharedPointer<Array<int>> sp = NULL;
-
-	sp = bt.traversal(PostOrder);
-	cout << (*sp).length() << endl;
-	for (int i = 0; i < (*sp).length(); i++)
-	{
-		cout << (*sp)[i] << " ";
-	}*/
-
 	return 0;
 }

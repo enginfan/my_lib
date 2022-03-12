@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -162,6 +162,7 @@
     <ClInclude Include="DynamicArray.h" />
     <ClInclude Include="DynamicList.h" />
     <ClInclude Include="Exception.h" />
+    <ClInclude Include="Graph.h" />
     <ClInclude Include="GTree.h" />
     <ClInclude Include="GTreeNode.h" />
     <ClInclude Include="LinkList.h" />
@@ -170,6 +171,8 @@
     <ClInclude Include="LinkStack.h" />
     <ClInclude Include="LinuxList.h" />
     <ClInclude Include="List.h" />
+    <ClInclude Include="ListGraph.h" />
+    <ClInclude Include="MatrixGraph.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="Pointer.h" />
     <ClInclude Include="QueenSolution.h" />
@@ -187,6 +190,7 @@
     <ClInclude Include="String.h" />
     <ClInclude Include="Tree.h" />
     <ClInclude Include="TreeNode.h" />
+    <ClInclude Include="Tree_problem.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DualStaticLinkList.h" />

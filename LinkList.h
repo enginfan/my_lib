@@ -155,7 +155,7 @@ public:
         return ret;
     }
 
-    int find(const T& e) const    //  O(n)
+    int find(  T& e) const   //  O(n)
     {
         int ret = -1;
         int i = 0;
