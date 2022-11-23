@@ -8,11 +8,13 @@ namespace mylib
 	class Sort :public Object
 	{
 	private:
-		Sort();
+        Sort();
+        //构造函数拷贝、构造函数、赋值构造函数全都被定义为私有的
+        //此时说明sort排序类是不可能有对象的
 		Sort(const Sort&);//一般函数声明可以只写形参类型,而无形参名//函数申明中，编译器不对形参名进行编译
 						 //同样的在函数定义里, 如果函数内不会用到此参数时, 可以只给出类型, 而参数名可以不用给出
 		Sort& operator=(const Sort&);
-		template<typename T>
+        template< typename T >
 		static void swap(T& a, T& b)
 		{
 			T c(a) ;
