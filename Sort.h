@@ -158,32 +158,24 @@ namespace mylib
 
 		//采用插入排序的希尔排序
 		template<typename T>
-		static void Shell(T array[], int len, bool min2max = true)
-		{
+        static void Shell(T array[], int len, bool min2max = true){
 			int d = len;
-			do
-			{
-				d = d / 3 + 1;
-				int u = d;
-				do
-				{
-					for (int i = u; i < len; i += d)
-					{
-						int k = i;
-						T e = array[i];
-						for (int j = i - d; (j >= 0) && (min2max ? array[j] > e:array[j] < e);j -= d)
-						{
-							array[j + d] = array[j];
-							k = j;
-						}
-						if (k != i)
-						{
-							array[k] = e;
-						};
-					}
-					u++;
-				} while (u < 2 * d);
-			} while (d > 1);
+			do{
+                d = d / 3 + 1;
+                for(int i=d;i<len;i+=d){
+                    int k = i;
+                    T e = array[i];
+
+                    for (int j = i - d; (j >= 0) && (min2max ? array[j] > e:array[j] < e);j -= d){
+                        array[j + d] = array[j];
+                        k = j;
+                    }
+                    if (k != i){
+                        array[k] = e;
+                    }
+                }
+
+            } while (d > 1);
 		}
 
 		//采用冒泡排序的希尔排序
