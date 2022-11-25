@@ -13,29 +13,31 @@ void swap1(T& a,T& b ){
     b=c;
 }
 
-
-
-void shell(vector<int>& nums){
-    int d=nums.size();
-    int len=nums.size();
-    do{
-        d=d/3+1;
-        bool exchange=true;
-        for(int i=(d==1)?0:d;i<len&&exchange;i+=d){
-            cout<<"i="<<i<<endl;
-            for(int j=((len-1)/d)*d;j>i;j-=d){
-                cout<<"j="<<j<<endl;
-                exchange=false;
-                if(nums[j-d]>nums[j]){
-                    cout<<nums[j-d]<<"->"<<nums[j]<<endl;
-                    swap1(nums[j-d],nums[j]);
-                    exchange=true;
-                }
+int Partition(vector<int>& nums,int begin,int end){
+    if(begin<end){
+        int pivot=nums[begin];
+        while(begin<end){
+            while(begin<end&&nums[end]>pivot){
+                end--;
             }
+            swap(nums[end],nums[begin]);
+            while(begin<end&&nums[begin]<=pivot){
+                begin++;
+            }
+            swap(nums[begin],nums[end]);
         }
-    }while(d>1);
-
+        return begin;
+    }
 }
+
+void Quick(vector<int>& nums,int begin,int end){
+    if(begin<end){
+        int pivot=Partition(nums,begin,end);
+        Quick(nums,begin,pivot-1);
+        Quick(nums,pivot+1,end);
+    }
+}
+
 
 
 int main(){
@@ -43,7 +45,9 @@ int main(){
     vector < int >* vec1=new vector <int>{1,8,3,2,3,2,0,8,9,10};
     int array[10]={1,8,3,2,3,2,0,8,9,10};
     //Sort::Shell(array,10);
-    shell(vec);
+    vector<int> m_vec(vec.size(),-1);
+    Quick(vec,0,vec.size()-1);
+
     for(int i=0;i<vec.size();i++){
         cout<<vec[i]<<endl;
     }
