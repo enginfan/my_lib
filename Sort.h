@@ -180,33 +180,22 @@ namespace mylib
 
 		//≤…”√√∞≈›≈≈–Úµƒœ£∂˚≈≈–Ú
 		template<typename T>
-		static void Shell2(T array[], int len, bool min2max = true)
-		{
-			int d = len;
-			do
-			{
-				d = d / 3 + 1;
-				int u = 0;
-				do
-				{
-					bool exchange = true;
-					for (int i = u; (i<len)&&(exchange); i+=d)
-					{
-						exchange = false;
-						int v = (len - u) / d;
-						for (int j =(u+v*d<len?u+v*d:u+(v-1)*d); j > i; j -= d)
-						{
-							if (min2max ? (array[j]<array[j - d]) : (array[j - d]<array[j]))
-							{
-								swap(array[j], array[j - d]);
-								exchange = true;
-							}
-						}
-					}
-					u++;
-				} while (u<d);
-			} while (d > 1);
-		}
+		static void Shell2(T array[], int len, bool min2max = true){
+            int d = len;
+            do{
+                d = d / 3 + 1;
+                bool exchange = true;
+                for (int i=d==1?0:1; (i<len)&&(exchange); i+=d){
+                    exchange = false;
+                    for (int j =((len-1)/d)*d; j > i; j -= d){
+                        if (min2max ? (array[j]<array[j - d]) : (array[j - d]<array[j])){
+                            swap(array[j], array[j - d]);
+                            exchange = true;
+                        }
+                    }
+                }
+            } while (d > 1);
+        }
 
 		//πÈ≤¢≈≈–Ú
 		template <typename T>
