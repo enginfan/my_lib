@@ -1,12 +1,13 @@
-#include"String.h"
-#include<cstring>
+#include<string.h>
 #include<cstdlib>
+#include"String.h"
+
 
 namespace mylib
 {
 	void String::init(const char* s)
 	{
-		m_str = _strdup(s);
+        m_str = _strdup(s);
 		if (m_str)
 		{
 			m_length = strlen(m_str);
@@ -292,7 +293,7 @@ namespace mylib
 	{
 		if (m_str != s)
 		{
-			char* str = _strdup(s ? s : "");
+            char* str = _strdup(s ? s : "");
 
 			if (str)
 			{
