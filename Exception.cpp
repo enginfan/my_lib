@@ -5,7 +5,7 @@
 using namespace std;
 namespace mylib {
 void Exception::init(const char *massage, const char *file, int line) {
-  m_massage = (massage ? strdup(massage) : NULL);
+  m_massage = (massage ? strdup(massage) : NULL);//防止massage的生命周期过短
   if (file != NULL) {
     char sl[16] = {0};
     _itoa(line, sl, 10);
@@ -23,7 +23,7 @@ Exception::Exception(const char *massage, const char *file, int line) {
   init(massage, file, line);
 }
 Exception::Exception(const Exception &e) {
-  m_massage = strdup(e.m_massage);
+  m_massage = strdup(e.m_massage);//保证都指向一片独立的堆空间
   m_location = strdup(e.m_location);
 }
 Exception &Exception::operator=(const Exception *e) {

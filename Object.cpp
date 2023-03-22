@@ -2,7 +2,7 @@
 #include <cstdlib>
 namespace mylib
 {
-	void* Object::operator new(std::size_t size)throw()
+	void* Object::operator new(std::size_t size)throw()//保证如果申请值失败不抛出异常而返回空指针
 	{
 		return malloc(size);
 	}

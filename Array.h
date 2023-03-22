@@ -19,8 +19,6 @@ namespace mylib
 			}
 			return ret;
 		}
-
-
 		virtual bool get(int i, T& e)const
 		{
 			bool ret = ((i >= 0) && (i < length()));

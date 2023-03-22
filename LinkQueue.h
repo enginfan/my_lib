@@ -4,7 +4,6 @@
 
 #include"Queue.h"
 #include"LinuxList.h"
-#include<iostream>
 
 namespace mylib
 {
@@ -38,7 +37,7 @@ namespace mylib
 			}
 			else
 			{
-
+				THROW_EXCEPTION(NullPointerException, "NULL_POINTER", "LinkQueue.h", 40);
 			}
 		}
 
@@ -53,7 +52,7 @@ namespace mylib
 			}
 			else
 			{
-
+				THROW_EXCEPTION(InvalidParameterException, "QUEUE_IS_IMPTY", "LinkQueue.h", 55);
 			}
 		}
 
@@ -65,7 +64,7 @@ namespace mylib
 			}
 			else
 			{
-
+				THROW_EXCEPTION(InvalidParameterException, "QUEUE_IS_IMPTY", "LinkQueue.h", 67);
 			}
 		}
 

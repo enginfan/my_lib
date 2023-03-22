@@ -15,10 +15,10 @@ namespace mylib
 		int m_length;
 
 		void init(const char* s);
-        bool equal(const char* l, const char* r, int len) const;
+    bool equal(const char* l, const char* r, int len) const;
 
-        static int* make_pmt(const char* p);//kmpËã·¨
-        static int pmt(const char* s, const char* p);
+    static int* make_pmt(const char* p);//kmpËã·¨
+    static int pmt(const char* s, const char* p);
 	public:
 		String();
 		String(char c);

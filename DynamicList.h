@@ -1,8 +1,8 @@
+#pragma once
 #ifndef DYNAMICLIST_H_
 #define DYNAMICLIST_H_
 #include "SeqList.h"
-#include<iostream>
-
+#include "Exception.h"
 namespace mylib
 {
 	template <typename T>
@@ -21,7 +21,7 @@ namespace mylib
 			}
 			else
 			{
-				cout << "MemoryError" << endl;
+				THROW_EXCEPTION(NoEnoughMemoryException, "DynamicList construct failed", "DynamicList.h", 24);
 			}
 		}
 		int capcity()const
@@ -48,7 +48,7 @@ namespace mylib
 				}
 				else 
 				{
-					cout << "ResizeError" << endl;
+					THROW_EXCEPTION(NoEnoughMemoryException, "DynamicList resize failed", "DynamicList.h", 51);
 				}
 			}
 		}

@@ -20,7 +20,7 @@ namespace mylib
 			}
 			else
 			{
-				cout << "DynamicArray_MemoryError" << endl;
+				THROW_EXCEPTION(NoEnoughMemoryException, "DynamicArray construct failed", "DynamicArray.h", 23);
 			}
 		}
 		DynamicArray(const DynamicArray<T>& dyna)
@@ -36,7 +36,7 @@ namespace mylib
 			}
 			else
 			{
-				cout << "DynamicArray_MemoryError" << endl;
+				THROW_EXCEPTION(NoEnoughMemoryException, "DynamicArray construct failed", "DynamicArray.h", 39);
 			}
 		}
 		DynamicArray<T>& operator=(const DynamicArray<T>& dyna)
@@ -81,7 +81,7 @@ namespace mylib
 				}
 				else
 				{
-					cout << "DYNA_COPY_ERROR" << endl;
+					THROW_EXCEPTION(NoEnoughMemoryException, "resize operation fail", "DynamicArray.h", 84);
 				}
 			}
 		}

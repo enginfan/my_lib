@@ -175,6 +175,7 @@
     <ClInclude Include="MatrixGraph.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="Pointer.h" />
+    <ClInclude Include="PriorityQueue.h" />
     <ClInclude Include="QueenSolution.h" />
     <ClInclude Include="Queue.h" />
     <ClInclude Include="SeqList.h" />

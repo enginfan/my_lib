@@ -1,7 +1,7 @@
 #pragma once
 #ifndef STATICQUEUE_H
 #define STATICQUEUE_H
-
+#include "Exception.h"
 #include "Queue.h"
 
 namespace mylib
@@ -27,12 +27,12 @@ namespace mylib
 			if (m_length < N)
 			{
 				m_space[m_rear] = e;
-				m_rear = (m_rear + 1) % N;
+				m_rear = (m_rear + 1) % N;//此处使用循环计数法
 				m_length++;
 			}
 			else
 			{
-
+				THROW_EXCEPTION(IndexOutOfBoundsException, "indexOutOfMemory", "StaticQueue", "35");
 			}
 		}
 
@@ -45,7 +45,7 @@ namespace mylib
 			}
 			else
 			{
-
+				THROW_EXCEPTION(IndexOutOfBoundsException, "indexOutOfMemory", "StaticQueue", "48");
 			}
 		}
 
